@@ -1,0 +1,15 @@
+{
+  "name": "Días de Mala Racha",
+  "short_name": "Mala Racha",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#001b44",
+  "theme_color": "#12d8f7",
+  "icons": [
+    {
+      "src": "icono.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
