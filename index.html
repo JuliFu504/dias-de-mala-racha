@@ -220,41 +220,37 @@ body{
 <script>
 
 /* FECHA INICIO */
-
 const fechaInicio = new Date("2026-01-27");
 
 /* FECHA FINAL */
-
 const fechaFinal = new Date("2030-01-27");
 
 function actualizar(){
 
     const hoy = new Date();
 
+    // Normalizar a medianoche (evita errores por horas)
+    const hoyUTC = Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+    const inicioUTC = Date.UTC(fechaInicio.getFullYear(), fechaInicio.getMonth(), fechaInicio.getDate());
+    const finalUTC = Date.UTC(fechaFinal.getFullYear(), fechaFinal.getMonth(), fechaFinal.getDate());
+
+    const diaMs = 1000 * 60 * 60 * 24;
+
     /* DÍAS PASADOS */
-
-    const diferenciaPasados = hoy - fechaInicio;
-
-    const diasPasados = Math.floor(
-        diferenciaPasados / (1000 * 60 * 60 * 24)
-    );
+    const diasPasados = Math.floor((hoyUTC - inicioUTC) / diaMs);
 
     /* DÍAS FALTANTES */
+    const diasFaltan = Math.floor((finalUTC - hoyUTC) / diaMs);
 
-    const diferenciaFaltan = fechaFinal - hoy;
-
-    const diasFaltan = Math.floor(
-        diferenciaFaltan / (1000 * 60 * 60 * 24)
-    );
-
-    document.getElementById("pasados").innerHTML =
-        diasPasados;
-
-    document.getElementById("faltan").innerHTML =
-        diasFaltan;
+    document.getElementById("pasados").innerHTML = diasPasados;
+    document.getElementById("faltan").innerHTML = diasFaltan;
 }
 
+/* ACTUALIZA AL CARGAR */
 actualizar();
+
+/* ACTUALIZA AUTOMÁTICAMENTE CADA DÍA */
+setInterval(actualizar, 1000 * 60 * 60 * 24);
 
 </script>
 
